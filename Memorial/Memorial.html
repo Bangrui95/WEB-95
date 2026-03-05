@@ -67,7 +67,7 @@
         <p>Collaborative Community Art Practice</p>
   
         <p class="label">Technical</p>
-        <p>Virtual Reality, Community Art Experience</p>
+        <p>Unity · Virtual Reality · Community Art Experience</p>
       </div>
 
       <div class="tech-stack">
@@ -148,37 +148,4 @@
   </section>
 </body>
 
-<script>
-    (function () {
-      const viewport = document.getElementById("hstrip");
-      if (!viewport) return;
-  
-      const track = viewport.querySelector(".hstrip__track");
-      const slides = track ? track.children : [];
-      if (!track || slides.length <= 1) return;
-  
-      let index = 0;
-      const intervalMs = 3000;
-  
-      // 如果用户开启“减少动态效果”，就不自动滑（更友好）
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (prefersReduced) return;
-  
-      function go(i) {
-        const w = viewport.clientWidth; // 每次滑动一个“viewport宽度”
-        viewport.scrollTo({ left: i * w, behavior: "smooth" });
-      }
-  
-      const timer = setInterval(() => {
-        index = (index + 1) % slides.length;
-        go(index);
-      }, intervalMs);
-  
-      // 窗口尺寸变化时，保持对齐到当前slide
-      window.addEventListener("resize", () => go(index));
-  
-      // 如果你以后想在鼠标悬停时暂停，可取消注释：
-      // viewport.addEventListener("mouseenter", () => clearInterval(timer));
-    })();
-  </script>
 </html>
