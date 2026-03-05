@@ -36,7 +36,7 @@ body {
 
 .hero-text {
   text-align: center;
-  margin-bottom: 50px;    /* 文字组和 Main 图像的间距 */
+  
 }
 
 .hero-text h1 {
@@ -60,6 +60,9 @@ body {
   font-size: 1.2rem;
   font-weight: 300;
 }
+
+
+
 
 /* Hero 主图（桌面端：你原来就是 98vw） */
 .hero > img {
@@ -252,6 +255,12 @@ body {
 
 /* ===== 手机端：上下两个框 + 全部字体缩放 ===== */
 @media (max-width: 900px) {
+
+
+  .hero > video {
+    width: var(--heroW);
+  }
+  
   .project-intro {
     flex-direction: column;
     gap: 0px;              /* ✅不要 0，不然两块贴死没呼吸 */
