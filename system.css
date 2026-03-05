@@ -1,0 +1,229 @@
+/* ===== SYSTEMS — HTML-matched layout (no weird fixed height) ===== */
+
+:root{
+    --bg:#000;
+    --fg:#fff;
+    --muted: rgba(255,255,255,.78);
+  
+    /* spacing */
+    --padX: 34px;
+    --padY: 18px;
+  
+    /* desktop layout */
+    --rightW: 66%;     /* 右侧图片区域宽度：页面的 66% */
+    --gapX: 34px;      /* 左右两列间距 */
+  }
+  
+  /* ===== Reset ===== */
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* ===== Base + hide scrollbar (still scrollable) ===== */
+  html, body{
+    background: var(--bg);
+    color: var(--fg);
+    overflow-x: hidden;
+  
+    scrollbar-width: none;      /* Firefox */
+    -ms-overflow-style: none;   /* IE/Edge legacy */
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+    display: none;              /* Chrome/Safari */
+  }
+  
+  .systems{
+    width: 100%;
+  }
+  
+  /* ===== Each item ===== */
+  .sys-item{
+    display: flex;
+    align-items: flex-start;    /* 高度由内容决定 */
+    gap: var(--gapX);
+    padding: 16px 0;            /* ✅上下留空隙 16px */
+  }
+  
+  /* divider between items */
+  .systems-divider{
+    width: 100%;
+    height: 2px;
+    background: #222;
+  }
+  
+  /* ===== Left column (text) ===== */
+  .sys-left{
+    flex: 1 1 auto;             /* 左侧吃剩余空间 */
+    min-width: 280px;
+    padding: var(--padY) 0 var(--padY) var(--padX);
+  
+    display: flex;              /* ✅为了让 readmore 贴底 */
+    flex-direction: column;
+    gap: 9px;
+  }
+  
+  /* 顶部：PROJECT / TYPE —— 必须纵向排列 */
+  .sys-meta-top{
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  
+  /* 每个 meta 块 */
+  .meta-col{}
+  
+  /* FOCUS：在描述上面 */
+  .sys-focus{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  /* 描述：更大、更松 */
+  .desc{
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    max-width: 46ch;
+  }
+  .desc-big{
+    font-size: 0.9rem;
+    line-height: 1.7;
+    max-width: 52ch;
+    padding-top: 30px;
+  }
+  
+  /* READ MORE：永远贴底 */
+  .sys-readmore{
+    margin-top: auto;           /* ✅关键：推到底部 */
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  /* label / value */
+  .label{
+    font-size: 0.7rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .55;
+  }
+  .value{
+    font-size: 1.05rem;
+    line-height: 1.35;
+    opacity: .95;
+  }
+  
+  /* link */
+  .link{
+    color: rgba(255,255,255,.92);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.35);
+    padding-bottom: 3px;
+    width: fit-content;
+  }
+  .link-big{
+    font-size: 1.05rem;
+  }
+  
+  /* ===== Right column (image) ===== */
+  .sys-right{
+    flex: 0 0 var(--rightW);
+
+    display: flex;
+    align-items: center;     /* 关键：垂直居中 */
+    justify-content: center; /* 水平居中 */
+  
+    padding: var(--padY) var(--padX) 0 0;
+  }
+  .media{
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  
+  
+  .media-main{
+    width: 100%;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+  
+  .media-main img{
+    width: 100%;
+    height: auto;                /* ✅高度自动 */
+    display: block;
+    object-fit: contain;         /* ✅不裁切 */
+    object-position: center;
+  }
+  
+  
+  /* ===== Mobile (keep your previous rule: image on top, 98% width) ===== */
+  @media (max-width: 980px){
+    :root{
+      --padX: 16px;
+      --padY: 14px;
+      --gapX: 0px;
+    }
+  
+    .sys-item{
+      flex-direction: column;   /* ✅图在上，文在下：因为 HTML 里图在后面，所以这里用 column + order */
+      gap: 0;
+      padding: 16px 0;
+    }
+  
+    .sys-right{
+      order: -1;                /* ✅把图片提到最上面 */
+      flex: none;
+      width: 100%;
+      padding: 0;
+    }
+  
+    .media{
+      width: 98%;
+      margin: 0 auto;
+    }
+  
+    .sys-left{
+      width: 100%;
+      padding: var(--padY) var(--padX);
+      min-width: 0;
+    }
+  
+    .desc,
+    .desc-big{
+      max-width: 70ch;
+    }
+  }
+
+
+  .sys-item{
+    display: flex;
+    align-items: stretch;   /* ✅关键：别用 flex-start */
+    gap: var(--gapX);
+    margin: 16px 0;         /* 上下留空隙 16px */
+  }
+  
+  /* 2) 右侧列用 flex 居中 */
+  .sys-right{
+    flex: 0 0 var(--rightW);      /* 66% 那个 */
+    display: flex;
+    align-items: center;          /* ✅垂直居中 */
+    justify-content: center;      /* ✅水平居中 */
+    padding: 0 var(--padX) 0 0;   /* ✅不要只留上 padding，否则视觉会被“顶下去” */
+  }
+  
+  /* 3) 图片按比例显示（不裁切） */
+  .media-main img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
