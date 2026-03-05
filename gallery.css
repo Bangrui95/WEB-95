@@ -1,0 +1,91 @@
+/* 对所有元素生效（包括 body） */
+html, body {
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* 防止因为宽度计算偏差产生的微小横向滚动 */
+    background-color: #000; /* 确保背景色统一 */
+    /* 1. 针对 Chrome, Safari, Edge 和 Opera (WebKit) */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+/* 2. 针对 WebKit 内核浏览器的专用伪类 */
+body::-webkit-scrollbar {
+    display: none;             /* 彻底隐藏 WebKit 浏览器的滚动条 */
+}
+
+/* 如果你只想针对特定的容器（比如你的 Gallery 网格）隐藏滚动条 */
+.your-container-class::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+
+/* ===== Gallery 容器控制 ===== */
+.gallery-container {
+    padding: 120px 3px 80px 3px; /* 与 INFO 页面边距保持一致 */
+    background-color: #000;
+    min-height: 100vh;
+}
+
+/* 瀑布流核心网格 */
+.masonry-grid {
+    column-count: 3;    /* 默认 3 列 */
+    column-gap: 3px;   /* 列间距 */
+    width: 100%;
+}
+
+/* 每一项的容器 */
+.grid-item {
+    width: 100%;
+    margin-bottom: 3px; /* 行间距 */
+    break-inside: avoid; /* 防止内容被跨列切断 */
+    overflow: hidden;
+    background: #111;    /* 占位底色 */
+    transition: transform 0.3s ease;
+}
+
+.grid-item img, 
+.grid-item video {
+    width: 100%;        /* 锁定宽度 */
+    height: auto;       /* 高度自适应锁定比例 */
+    display: block;
+    filter: grayscale(20%); /* 可选：稍微降噪，符合你极简的风格 */
+    transition: all 0.5s ease;
+}
+
+/* Hover 交互效果 */
+.grid-item:hover {
+    transform: translateY(-3px);
+}
+
+.grid-item:hover img,
+.grid-item:hover video {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+}
+
+/* ===== 响应式适配 ===== */
+@media (max-width: 1024px) {
+    .masonry-grid {
+        column-count: 2; /* 平板端 2 列 */
+    }
+}
+
+@media (max-width: 600px) {
+    .masonry-grid {
+        column-count: 1; /* 手机端 1 列 */
+    }
+    .gallery-container {
+        padding: 80px 20px;
+    }
+}

@@ -1,0 +1,508 @@
+/* ===== 1. 基础复位与全局控制 ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 隐藏滚动条但保留滚动功能 */
+body::-webkit-scrollbar { display: none; }
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ===== 2. 布局核心修正 ===== */
+.info-content {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 33px 80px 33px;
+}
+
+.info-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== 3. 传记文字样式 ===== */
+.bio-text {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    word-spacing: 0.1em;
+    color: #ffffff;
+    max-width: 80ch;
+}
+
+.bio-text:nth-of-type(1) {
+    font-size: 2.6vw; 
+    line-height: 1.1;
+    text-align: left;
+    align-self: flex-start;
+    margin-bottom: 80px;
+}
+
+.bio-text:nth-of-type(2) {
+    font-size: 1.9vw; 
+    line-height: 1.1;
+    text-align: right;
+    align-self: flex-end;
+    opacity: 0.9;
+}
+
+/* ===== 4. 高亮文字与悬浮效果 ===== */
+.bio-text .highlight {
+    color: #ffffff;   
+    background-color: transparent;
+    padding: 2px 10px; 
+    margin: 0 -2px; 
+    vertical-align: baseline; 
+    display: inline-block;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.bio-text:hover .highlight {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 2px;
+}
+
+.bio-text .highlight:hover {
+    color: rgb(255, 0, 0) !important;   
+    transform: scale(1.02);
+}
+
+
+/* 1. 默认状态：你可以设置成白色或继承正文颜色 */
+.practice-description .text-highlight {
+    color: #ffffff; 
+    font-weight: 600;
+    transition: color 0.4s ease, transform 0.3s ease; /* 颜色和微动动画 */
+    display: inline-block; /* 允许微小的位移效果 */
+}
+
+/* 2. 整个段落被 Hover 时，所有高亮词一起变红 (可选) */
+/* 如果你希望鼠标碰到这段文字，所有重点词都一起亮起，用这个： */
+.practice-description:hover .text-highlight {
+    color: rgb(255, 0, 0);
+}
+
+/* 3. 鼠标单独指到某个词时，效果加深 */
+.practice-description .text-highlight:hover {
+    color: rgb(255, 0, 0) !important;
+    transform: translateY(-1px); /* 向上微动，增加交互感 */
+    cursor: pointer;
+}
+
+/* ===== 5. Practice Areas 布局 (全屏穿透) ===== */
+.practice-areas {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-top: 33px;
+    border-top: 1px solid #ff0000;
+    padding: 20px 33px 0 33px;
+    box-sizing: border-box;
+}
+
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+}
+
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+    row-gap: 60px;
+}
+
+.practice-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.practice-item:hover {
+    border-top-color: #fff;
+}
+
+.practice-item:hover .item-name {
+    color: rgb(255, 6, 0);
+}
+
+.item-meta {
+    font-size: 0.7rem;
+    color: #666;
+    margin-bottom: 15px;
+    font-family: 'Inter', monospace;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    position: relative;
+    transition: color 0.3s ease;
+    display: block;
+    min-height: 1em;
+}
+
+.practice-item:hover .item-meta {
+    color: #fff;
+    font-size: 0;
+}
+
+.practice-item:hover .item-meta::after {
+    content: attr(data-level);
+    font-size: 0.7rem;
+    display: inline-block;
+}
+
+.item-name {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.item-desc {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #aaa;
+    max-width: 90%;
+}
+
+/* Practice 描述文字样式 */
+.practice-description {
+    width: 100%; /* 确保占据 100% 容器宽度 */
+    max-width: none; /* 移除之前的字符限制 */
+    margin-top: -50px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.practice-description p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #eee;
+    font-weight: 400;
+    text-align: justify; /* 两端对齐，符合你硬核的设计风格 */
+}
+
+/* 针对加粗文字的微调，使其在黑底上更醒目 */
+.practice-description strong {
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* 响应式微调 */
+@media (max-width: 768px) {
+    .practice-description {
+        margin-bottom: 50px;
+    }
+    .practice-description p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+
+/* ===== 6. Education Section (全屏穿透) ===== */
+.education-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-top: 66px;
+    border-top: 1px solid #ff0000;
+    padding: 20px 33px 10px 33px;
+    box-sizing: border-box;
+}
+
+.education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    width: 100%; 
+}
+
+.education-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+.edu-header-row {
+    display: flex;
+    justify-content: space-between; 
+    align-items: baseline;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #222; 
+    padding-bottom: 10px;
+}
+
+.edu-grade {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 10px;
+    font-weight: 400;
+}
+
+.edu-year {
+    font-size: 0.9rem;
+    color: #666;
+    font-family: monospace;
+}
+
+.edu-university {
+    font-size: 2.6vw; 
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.edu-college {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+.edu-details-optimized {
+    list-style: none;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    column-gap: 8%; 
+}
+
+.edu-details-optimized li {
+    font-size: 0.95rem;
+    color: #eee;
+    padding-left: 15px;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.edu-details-optimized li::before {
+    content: "·";
+    position: absolute; left: 0;
+}
+
+.edu-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #aaa;
+    text-align: justify;
+}
+
+/* ===== 7. Experience Section (全屏穿透) ===== */
+.experience-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-top: 66px;
+    border-top: 1px solid #ff0000;
+    padding: 20px 33px 10px 33px;
+    box-sizing: border-box;
+}
+
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+    width: 100%;
+}
+
+.exp-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.exp-company {
+    font-size: 2.6vw;
+    font-style: italic;
+    font-weight: 700;
+    color: #fff;
+}
+
+.exp-year {
+    font-size: 0.9rem;
+    color: #fff;
+}
+
+.exp-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10%;
+}
+
+.exp-summary, .exp-role-transition {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #fff;
+}
+
+.exp-type-tag {
+    font-size: 0.85rem; color: #666; margin-top: 5px;
+}
+
+.exp-tasks { list-style: none; }
+.exp-tasks li {
+    font-size: 0.95rem; color: #aaa; line-height: 1.6;
+    margin-bottom: 10px; padding-left: 15px; position: relative;
+}
+.exp-tasks li::before { content: "·"; position: absolute; left: 0; color: #fff; }
+
+/* ===== 8. Project Section (全屏穿透) ===== */
+.project-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    margin-top: 66px;
+    border-top: 1px solid #ff0000;
+    padding: 10px 33px 150px 33px;
+    box-sizing: border-box;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* 核心：重置 A 标签样式，防止蓝色和下划线 */
+.project-item, .project-item:visited {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 垂直居中 */
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+}
+
+.project-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding-left: 10px;
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.project-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.project-item:hover .project-name {
+    color: rgb(255, 0, 0) !important;
+}
+
+.project-tagline {
+    font-size: 0.9rem;
+    color: #ffffff;
+    opacity: 0.8; /* 调整为 60% 的透明度 */
+}
+
+.project-tagline2 {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.project-year {
+    font-size: 0.9rem;
+    color: #fff;
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 40px;
+}
+
+/* 箭头效果 */
+.arrow {
+    display: inline-block;
+    margin-left: 8px;
+    opacity: 0;
+    transform: translate(-6px, 6px);
+    transition: all 0.3s ease;
+    color: rgb(255, 0, 0);
+}
+
+.project-item:hover .arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* MORE PROJECTS 特殊样式 */
+.more-projects-link {
+    border-bottom: none !important;
+}
+
+.more-projects-link .project-name {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.arrow-icon {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: #888;
+}
+
+.more-projects-link:hover .arrow-icon {
+    color: #fff;
+}
+
+/* ===== 9. 响应式适配 ===== */
+@media (max-width: 1024px) {
+    .bio-text:nth-of-type(1) { font-size: 4.5vw; }
+    .bio-text:nth-of-type(2) { font-size: 3.5vw; }
+}
+
+@media (max-width: 900px) {
+    .practice-grid, .exp-content-grid { grid-template-columns: 1fr; }
+    .edu-university, .exp-company { font-size: 32px; }
+}
+
+@media (max-width: 768px) {
+    .info-content { padding: 80px 20px 40px 20px; }
+    .project-item { align-items: flex-start; flex-direction: column; }
+    .project-year { text-align: left; margin-left: 0; margin-top: 10px; }
+}

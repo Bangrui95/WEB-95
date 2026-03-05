@@ -1,0 +1,114 @@
+/* ===== 1. 基础复位与字体平滑 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 配合 fixed 导航栏，防止页面抖动 */
+  overflow-x: hidden; 
+}
+
+/* ===== 2. 作品网格布局 ===== */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  /* 减小列间距 gap 的第二个值，使两列图像更靠近，强化中间对齐的视觉感 */
+  gap: 15px 3px; 
+  padding: 100px 0px 60px 0px; /* 顶部预留 100px 给导航栏 */
+}
+
+.grid-item {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4:3 比例容器 */
+.image-box {
+  width: 100%;
+  position: relative;
+  padding-top: 75%; /* 强制 4:3 比例 */
+  overflow: hidden;
+  background: #1a1a1a;
+  margin-bottom: 15px;
+}
+
+.image-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 悬停图片放大交互 */
+.grid-item:hover .image-box img {
+  transform: scale(1.03);
+}
+
+/* ===== 3. 文字介绍部分 (核心对齐逻辑) ===== */
+.item-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.item-info h3 {
+  font-size: 16px;
+  font-weight: 550;
+  margin-bottom: 4px;
+  color: #ffffff;
+}
+
+.item-info p {
+  font-size: 14px;
+  font-weight: 300;
+  color: #888888;
+}
+
+/* ✅ 左侧图像 (奇数项)：向右对齐，靠向中线 */
+.grid-item:nth-child(odd) .item-info {
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 6px; /* 留出微小间距，避免紧贴中线 */
+}
+
+/* ✅ 右侧图像 (偶数项)：向左对齐，靠向中线 */
+.grid-item:nth-child(even) .item-info {
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 6px; /* 留出微小间距，避免紧贴中线 */
+}
+
+/* ===== 4. 响应式适配 ===== */
+@media (max-width: 900px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+    padding: 80px 0px 0px 0px;
+    gap: 10px;
+  }
+  
+  /* 移动端恢复标准对齐，符合阅读习惯 */
+  .grid-item:nth-child(odd) .item-info,
+  .grid-item:nth-child(even) .item-info {
+    align-items: flex-start;
+    text-align: left;
+    padding: 0 0 0 6px;
+  }
+
+  .name-line, .nav-link { 
+    font-size: 16px; 
+  }
+}
+
+

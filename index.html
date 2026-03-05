@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DESIGN 95 | BANGRUI WANG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+<head>
+  <link rel="stylesheet" href="common.css">
+  
+  <script src="navbar.js" defer></script>
+</head>
+
+<!-- <nav class="navbar">
+    <a href="index.html" class="nav-left-link">
+      <div class="name-line">DESIGN 95</div>
+      <div class="name-line">BANGRUI WANG</div>
+    </a>
+    
+    <div class="nav-right">
+      <a href="work.html" class="nav-link">WORK</a>
+      <a href="info.html" class="nav-link">INFO</a>
+      <a href="contact.html" class="nav-link">CONTACT</a>
+    </div>
+  </nav> -->
+
+  <body>
+    <main class="home-container">
+      <section class="info-content">
+        <div class="info-wrapper">
+          <p class="bio-text">
+            <span class="highlight">Interdisciplinary creative technologist</span>
+            <span class="typewriter-text">with a Master’s degree in</span>
+            <span class="highlight">Creative Computing</span>
+            <span class="typewriter-text">from University of the Arts London and a background in</span>
+            <span class="highlight">Graphic Design</span>
+            <span class="typewriter-text">combines design thinking with technical development focusing on</span>
+            <span class="highlight">interaction design</span>
+            <span class="highlight">creative coding</span>
+            <span class="typewriter-text">and the construction of</span>
+            <span class="highlight">technology driven visual systems</span>
+            <span class="typewriter-text">works to translate conceptual ideas into functional digital experiences and interactive products</span>
+          </p>
+        </div>
+      </section>
+  
+      <section class="hero-video-container">
+        <video class="main-video" autoplay loop muted playsinline>
+          <source src="0IMAGE/TDMovieOut.1 - MP4.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </section>
+    </main>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const typeTarget = document.querySelectorAll(".typewriter-text");
+          const speed = 20; 
+          
+          typeTarget.forEach((container) => {
+              const text = container.innerText;
+              container.innerHTML = ""; 
+              [...text].forEach((char) => {
+                  const charSpan = document.createElement("span");
+                  charSpan.innerText = char;
+                  container.appendChild(charSpan);
+              });
+          });
+      
+          const allChars = document.querySelectorAll(".typewriter-text span");
+          allChars.forEach((char, index) => {
+              setTimeout(() => {
+                  char.style.opacity = "1";
+              }, index * speed);
+          });
+      });
+    </script>
+  </body>
+</html>

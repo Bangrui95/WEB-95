@@ -1,0 +1,306 @@
+/* ===== 1. 基础复位与禁用滚动条 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #000;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== 2. 内容宽度变量（桌面端保持你原有逻辑）===== */
+:root {
+  --contentW: min(90vw, calc(100vh * 4 / 3));
+}
+
+/* ===== 3. HERO 部分 (文字 + Main图) ===== */
+.hero {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* 保证文字和图片都水平居中 */
+  background: #000;
+  padding: 60px 0 0 0;   /* 顶部留白 */
+}
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 50px;    /* 文字组和 Main 图像的间距 */
+}
+
+.hero-text h1 {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.divider {
+  width: 80px;
+  height: 1px;
+  background: rgba(255, 255, 255, 1);
+  margin: 25px auto;
+}
+
+.hero-text p {
+  color: #d0d0d0;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+/* Hero 主图（桌面端：你原来就是 98vw） */
+.hero > img {
+  width: 98vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ===== 4. STACK 部分 (保持你最初的样子) ===== */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-item {
+  display: flex;
+  justify-content: center;
+  line-height: 0;
+}
+
+/* Stack 普通图片（桌面端） */
+.stack-item > img {
+  display: block;
+  width: var(--contentW);
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+/* Stack 视频（桌面端） */
+.stack-item > video {
+  display: block;
+  width: var(--contentW);
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+/* ===== 5. 移动端：Hero 和 Stack 分开控制（只改这里两行即可）===== */
+@media (max-width: 768px) {
+
+  /* 你后期只需要改这两行 */
+  :root {
+    --heroW: 100vw;   /* main.jpg 手机端宽度 */
+    --stackW: 100vw;  /* 普通图/视频 手机端宽度 */
+  }
+
+  .hero-text h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+  }
+
+  /* main.jpg（只影响 Hero 里的那张） */
+  .hero > img {
+    width: var(--heroW);
+  }
+
+  /* 下面普通图片（只影响 stack 里直接的 img） */
+  .stack-item > img {
+    width: var(--stackW);
+    max-height: none;  /* 手机端更自然（不强行限制 100vh） */
+  }
+
+  /* 下面视频（只影响 stack 里直接的 video） */
+  .stack-item > video {
+    width: var(--stackW);
+    max-height: none;
+  }
+}
+
+
+/* ===== Project Intro (两列等高框 + 手机纵向) ===== */
+
+.project-intro {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 6px 0 10px 0;
+
+  display: flex;
+  gap: 6vw;
+  align-items: stretch;
+}
+
+/* 卡片容器 */
+.intro-left,
+.intro-right {
+  width: 100%;
+  border-radius: 18px;
+  padding: 39px 33px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* 桌面端比例 */
+.intro-left  { flex: 0 0 40%; }
+.intro-right { flex: 0 0 50%; }
+
+/* ===== 左侧 Meta（层级更清晰） ===== */
+.meta { margin-bottom: 22px; }
+
+.meta .label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0;
+}
+
+.meta .label + p {
+  margin: 6px 0 0 0;
+  font-size: 1rem;
+  line-height: 1.35;
+  opacity: 0.95;
+}
+
+.meta p + .label {
+  margin-top: 16px;
+}
+
+/* 技术图标 */
+.tech-stack {
+  display: flex;
+  gap: 14px;
+  margin: 16px 0 28px 0;
+}
+
+.tech-stack img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: 0.3s ease;
+}
+
+.tech-stack img:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+/* 数据区（桌面保持大气，但留更紧凑的节奏） */
+.stats { margin-bottom: 34px; }
+.stat { margin-bottom: 26px; }
+
+.stat h2 {
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.stat p {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin: 6px 0 0 0;
+  line-height: 1.35;
+}
+
+/* 按钮 */
+.download-btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  border: none;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.download-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ===== 右侧：标题/正文（行距变紧，手机会更小） ===== */
+.intro-right h3 {
+  font-size: 1.5rem;
+  margin: 0 0 14px 0;
+  line-height: 1.2;
+}
+
+.intro-right p {
+  font-size: 1rem;
+  line-height: 1.55;   /* ✅比 1.8 紧凑 */
+  opacity: 0.85;
+  margin: 0 0 18px 0;  /* ✅段落间距缩小 */
+}
+
+.intro-right p + h3 {
+  margin-top: 34px;    /* ✅第二段标题上方留白缩小 */
+}
+
+/* ===== 手机端：上下两个框 + 全部字体缩放 ===== */
+@media (max-width: 900px) {
+  .project-intro {
+    flex-direction: column;
+    gap: 0px;              /* ✅不要 0，不然两块贴死没呼吸 */
+    padding: 10px 0 16px 0;
+  }
+
+  .intro-left,
+  .intro-right {
+    flex: none;
+    width: 100%;
+    padding: 26px 20px;     /* ✅不要 0px 26px，卡片需要内边距 */
+  }
+
+  /* 左侧 meta 文本缩小一点 */
+  .meta .label { font-size: 0.68rem; }
+  .meta .label + p {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  /* 技术图标稍微小一点 */
+  .tech-stack img {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* 关键：大数字在手机上缩小，不抢标题 */
+  .stat h2 {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .stat p {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  /* 关键：右侧标题、段落在手机上缩小 + 更紧凑 */
+  .intro-right h3 {
+    font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+    margin-bottom: 12px;
+  }
+
+  .intro-right p {
+    font-size: 0.92rem;     /* ✅段落比标题小 */
+    line-height: 1.45;      /* ✅更紧凑 */
+    margin-bottom: 14px;
+  }
+
+  .intro-right p + h3 {
+    margin-top: 22px;
+  }
+}

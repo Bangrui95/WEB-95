@@ -1,0 +1,123 @@
+/* ===== 1. 基础复位与全局溢出控制 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 关键：彻底禁用横向滑动 */
+  overflow-x: hidden; 
+  width: 100%;
+}
+
+/* ===== 3. 内容布局核心 ===== */
+.contact-content {
+  /* 确保最小高度依然填满视口，但要补足导航栏的 80px */
+  min-height: calc(100vh - 80px); 
+  display: flex;
+  align-items: center; 
+  padding: 80px 33px 0 33px; /* 顶部增加 80px 补位 */
+}
+
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* 桌面端大字号设置 */
+.stark-text {
+  font-size: 6vw; 
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  /* 允许在必要时断词，防止撑破容器 */
+  word-wrap: break-word; 
+  word-break: break-all;
+}
+
+.stark-text span {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0 15px;
+  display: inline-block;
+  margin-bottom: 5px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  /* 确保背景块不会超过屏幕宽度 */
+  max-width: 100%; 
+}
+
+.stark-text span:hover {
+  background-color: rgb(255, 6, 0);
+  color: #000000;
+}
+
+/* ===== 4. 社交链接 (PC版) ===== */
+.contact-social {
+  display: flex;
+  flex-direction: column; 
+  gap: 12px;
+}
+
+.contact-social a, 
+.contact-social a:link, 
+.contact-social a:visited {
+  font-size: 3rem; /* 使用相对单位更稳定 */      
+  font-weight: 600;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  display: block;
+  width: fit-content;
+}
+
+.contact-social a:hover {
+  color: rgb(255, 6, 0) !important;
+}
+
+/* ===== 5. 移动端自适应优化 (针对 iPhone 等窄屏) ===== */
+@media (max-width: 768px) {
+  .contact-content {
+    padding: 0 20px; /* 缩小侧边距 */
+    min-height: calc(100vh - 333px); /* 对应你之前的 60px 手机导航高度 */
+  }
+
+  .stark-text {
+    /* 缩小字号防止 Email 溢出 */
+    font-size: 8vw; 
+    margin-bottom: 30px;
+  }
+
+  .stark-text span {
+    padding: 0 10px;
+    margin-bottom: 3px;
+  }
+
+  .contact-social a {
+    font-size: 1.1rem; /* 移动端社交链接字号 */
+  }
+}
+
+/* 针对极小屏手机的最终修正 */
+@media (max-width: 480px) {
+
+  .contact-content {
+    padding: 0 20px; /* 缩小侧边距 */
+    min-height: calc(100vh - 66px); /* 对应你之前的 60px 手机导航高度 */
+  }
+  .stark-text {
+    font-size: 10vw; /* 进一步收缩大字 */
+  }
+}

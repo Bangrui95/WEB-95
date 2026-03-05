@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Urban Soundscape</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="UrbanSound.css" />
+</head>
+
+<head>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../navbar.js" defer></script>
+</head>
+
+
+
+<body>
+
+
+
+  <section class="hero">
+    <div class="hero-text">
+        <h1>Urban Soundscape</h1>
+        <div class="divider"></div> <p>Installation Art</p>
+    </div>
+    <img src="image/final/main.jpg" alt="Hero Image">
+  </section>
+
+
+
+
+
+
+  <section class="project-intro">
+
+    <div class="intro-left">
+
+
+      <div class="stats">
+        <div class="stat">
+          <h2>2023</h2>
+          <p>Audiogenic Simulacra</p>
+          <p>The 11th National College Student Digital Media Technology Works and Creative Competition</p>
+          <p>  </p>
+          <p>  </p>
+          <h2>2024</h2>
+          <p>4th Nomadic Illumination Festival of Digital Art</p>
+
+        </div>
+  
+        <!-- <div class="stat">
+          <h2>60%</h2>
+          <p>First week retention</p>
+        </div> -->
+  
+        <!-- <div class="stat">
+          <h2>66%</h2>
+          <p>Returning users</p>
+        </div> -->
+      </div>
+
+
+
+      <!-- <h1 class="project-title">CONSOLE.LOG("0XPULSE")</h1> -->
+  
+      <div class="meta">
+        <p class="label">FIELD</p>
+        <p>Urban Interactive Art Installation</p>
+  
+        <p class="label">Technical</p>
+        <p>VJing, Installation Art, Interactive System, Laser Cutting, 3D Printing</p>
+      </div>
+
+      <div class="tech-stack">
+
+        <img src="image/Touchdesigner.webp" alt="TouchDesigner">
+        <img src="image/ARDUINO.webp" alt="Arduino">
+        <img src="image/Blender.webp" alt="Blender">
+        <img src="image/Sketchup.webp" alt="Sketchup">
+        <img src="image/LIVE.webp" alt="Ableton Live">
+        <!-- <img src="image/GPT.webp" alt="OpenAI">
+        <img src="image/ARDUINO.webp" alt="ARDUINO"> -->
+      
+      </div>
+      
+  
+      
+  
+      <!-- <button class="download-btn">Download Project Images</button> -->
+    </div>
+  
+  
+    <div class="intro-right">
+  
+      <h3>Materialising the Urban Soundscape</h3>
+      <p>
+        Urban Sound investigates urban sound as a form of public information and spatial material. Traffic rhythms, mechanical hums, fragments of speech, and structural vibrations are treated not as background noise, but as dynamic data embedded within the city’s infrastructure.</p>
+  
+      <p>
+        A custom-built device collects environmental sound in real time, analysing frequency, amplitude, and temporal variation. These parameters are translated into responsive visual structures, generating light and projection that evolve with surrounding acoustic conditions. Sound is not illustrated, but transformed — shifting from invisible signal to spatial presence.
+
+       
+      </p>
+
+      <p>
+        Through audiovisual synthesis, the project reveals the structural patterns of the sonic environment. By converting urban sound into dynamic visual feedback, Urban Sound reframes the city as an active signal system and invites audiences to reconsider their relationship with urban space, sound ecology, and mediated perception.
+      </p>
+  
+      <h3>Exhibition & Live Presentation</h3>
+  
+      <p>
+        As an urban-scale installation, the project toured offline for one month in Dalian, China (2023) and Nanjing, China (2024), and featured live interactive performances with experimental music artists during the exhibitions.
+      </p>
+
+  
+    </div>
+  
+  </section>
+
+
+
+
+  <section class="stack">
+    <div class="stack-item"><img src="image/final/001-1.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-2.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-3.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-4.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-5.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-6.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-7.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-8.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-9.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-10.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-11.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-12.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/final/001-13.webp" alt="Image 1"></div>
+
+  </section>
+</body>
+
+<!-- <script>
+    (function () {
+      const viewport = document.getElementById("hstrip");
+      if (!viewport) return;
+  
+      const track = viewport.querySelector(".hstrip__track");
+      const slides = track ? track.children : [];
+      if (!track || slides.length <= 1) return;
+  
+      let index = 0;
+      const intervalMs = 3000;
+  
+      // 如果用户开启“减少动态效果”，就不自动滑（更友好）
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
+  
+      function go(i) {
+        const w = viewport.clientWidth; // 每次滑动一个“viewport宽度”
+        viewport.scrollTo({ left: i * w, behavior: "smooth" });
+      }
+  
+      const timer = setInterval(() => {
+        index = (index + 1) % slides.length;
+        go(index);
+      }, intervalMs);
+  
+      // 窗口尺寸变化时，保持对齐到当前slide
+      window.addEventListener("resize", () => go(index));
+  
+      // 如果你以后想在鼠标悬停时暂停，可取消注释：
+      // viewport.addEventListener("mouseenter", () => clearInterval(timer));
+    })();
+  </script> -->
+</html>

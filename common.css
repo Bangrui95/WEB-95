@@ -1,0 +1,87 @@
+/* ============================================================
+   统一导航栏标准版 - 最终修正方案
+   ============================================================ */
+
+/* 1. 全局字体强制设置 - 确保所有页面文字默认继承 Inter */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding-top: 80px; /* 补偿 fixed 导航栏占据的空间 */
+}
+
+/* 2. 导航栏主容器 */
+.navbar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 33px;
+  background-color: rgba(0, 0, 0, 0.15); /* 稍微深一点的透明黑，防止文字重叠干扰 */
+  position: fixed; /* 强制置顶，不随滚动消失 */
+  top: 0;
+  left: 0;
+  z-index: 999999 !important;
+  box-sizing: border-box;
+}
+
+/* 3. 核心修正：强制左侧姓名和右侧链接在所有状态下为白色 */
+/* 增加 .nav-left-link 确保左侧姓名不会变蓝 */
+.nav-left-link, 
+.nav-link,
+.nav-left-link:visited, 
+.nav-link:visited,
+.nav-left-link:link,
+.nav-link:link {
+  color: #ffffff !important; 
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+/* 4. 左侧姓名组排版 */
+.nav-left-link {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-family: 'Inter', sans-serif; /* 强制再次指定字体 */
+}
+
+/* 5. 右侧链接组布局 */
+.nav-right {
+  display: flex;
+  gap: 33px;
+}
+
+/* 6. 统一字体规格 */
+.name-line, .nav-link {
+  font-family: 'Inter', sans-serif; /* 确保 Inter 字体生效 */
+  font-size: 22px; 
+  font-weight: 600; 
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+
+/* 7. 唯一悬停效果：变红 */
+.nav-link:hover,
+.nav-left-link:hover .name-line {
+  color: rgb(255, 6, 0) !important; 
+}
+
+/* 8. 移动端强制适配 */
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px; /* 手机端导航栏变窄，补偿也要变小 */
+  }
+  .navbar {
+    height: 60px;
+    padding: 0 11px;
+  }
+  .nav-right {
+    gap: 13px; /* 4个选项时，间距不能太大，防止重叠 */
+  }
+  .name-line, .nav-link {
+    font-size: 16px; /* 字体稍微调小一点，确保4个词放得下 */
+    letter-spacing: 0.01em;
+  }
+}

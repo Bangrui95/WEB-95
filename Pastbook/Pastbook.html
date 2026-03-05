@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The past is present</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="Pastbook.css" />
+</head>
+
+<head>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../navbar.js" defer></script>
+</head>
+
+<body>
+
+  
+  <section class="hero">
+    <div class="hero-text">
+        <h1>The Past Is Present</h1>
+        <div class="divider"></div> <p>Community Art Project</p>
+    </div>
+    <img src="image/main.jpg" alt="Hero Image">
+  </section>
+
+
+
+
+  <section class="project-intro">
+
+    <div class="intro-left">
+
+
+      <div class="stats">
+        <div class="stat">
+          <h2>2023</h2>
+          <!-- <p>Toy with some greater issues</p> -->
+        
+        
+        </div>
+  
+        <!-- <div class="stat">
+          <h2>60%</h2>
+          <p>First week retention</p>
+        </div> -->
+  
+        <!-- <div class="stat">
+          <h2>66%</h2>
+          <p>Returning users</p>
+        </div> -->
+      </div>
+
+
+
+      <!-- <h1 class="project-title">CONSOLE.LOG("0XPULSE")</h1> -->
+  
+      <div class="meta">
+        <p class="label">FIELD</p>
+        <p>Urban Research</p>
+  
+        <p class="label">Technical</p>
+        <p>Field Research, Archival Documentation, Editorial Design</p>
+      </div>
+
+      <div class="tech-stack">
+
+        
+        
+        <img src="image/Adobe.webp" alt="Adobe">
+        <!-- <img src="image/Sketchup.webp" alt="Sketchup"> -->
+        <!-- <img src="image/LIVE.webp" alt="Ableton Live"> -->
+        <!-- <img src="image/GPT.webp" alt="OpenAI">
+        <img src="image/ARDUINO.webp" alt="ARDUINO"> -->
+      
+      </div>
+      
+  
+      
+  
+      <!-- <button class="download-btn">Download Project Images</button> -->
+    </div>
+  
+  
+    <div class="intro-right">
+  
+      <h3>The Past</h3>
+      <p>
+        This project focuses on a historical architectural district in Dalian known as Liansuo Street. During the period of Japanese colonial rule, the area was once one of the most prosperous commercial districts in East Asia. After the end of colonial governance, the district returned to Chinese administration. However, due to complex historical legacies and shifting urban development priorities, the area gradually declined and now exists in a state of physical deterioration and social neglect.
+       </p>
+  
+      <p>
+        Through field research, archival investigation, and the collection of physical materials, the project extracts textures embedded in walls, signage, building surfaces, and discarded fragments. These traces quietly document a contested historical period. Rather than treating these textures as decorative elements, the project regards them as carriers of time, political memory, and everyday life.
+
+       
+      </p>
+
+      <p>
+        The collected visual materials are reorganized into a book that reconstructs the narrative of the street through graphic interpretation and archival storytelling. By transforming urban decay into a tactile publication, the project reframes the district as a living historical document. It calls for renewed public awareness of this overlooked chapter of regional history and questions how cities remember, erase, or preserve their colonial past.
+      </p>
+  
+  
+  
+    </div>
+  
+  </section>
+
+  <section class="stack">
+    <!-- FINAL -->
+    <div class="stack-item"><img src="image/01.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/02.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/03.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/04.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/05.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/06.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/07.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/08.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/09.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/10.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/11.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/12.webp" alt="Image 1"></div>
+    <div class="stack-item"><img src="image/13.webp" alt="Image 1"></div>
+    
+
+  </section>
+</body>
+
+<script>
+    (function () {
+      const viewport = document.getElementById("hstrip");
+      if (!viewport) return;
+  
+      const track = viewport.querySelector(".hstrip__track");
+      const slides = track ? track.children : [];
+      if (!track || slides.length <= 1) return;
+  
+      let index = 0;
+      const intervalMs = 3000;
+  
+      // 如果用户开启“减少动态效果”，就不自动滑（更友好）
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
+  
+      function go(i) {
+        const w = viewport.clientWidth; // 每次滑动一个“viewport宽度”
+        viewport.scrollTo({ left: i * w, behavior: "smooth" });
+      }
+  
+      const timer = setInterval(() => {
+        index = (index + 1) % slides.length;
+        go(index);
+      }, intervalMs);
+  
+      // 窗口尺寸变化时，保持对齐到当前slide
+      window.addEventListener("resize", () => go(index));
+  
+      // 如果你以后想在鼠标悬停时暂停，可取消注释：
+      // viewport.addEventListener("mouseenter", () => clearInterval(timer));
+    })();
+  </script>
+</html>

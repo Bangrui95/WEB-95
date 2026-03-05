@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALLERY | BANGRUI WANG</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="gallery.css">
+    
+    <script src="navbar.js" defer></script>
+</head>
+
+<body>
+    <main class="gallery-container">
+        <div class="masonry-grid" id="image-loader">
+            </div>
+    </main>
+
+    <script>
+        // 修正：删除了重复的视频文件名
+        const fileNames = [
+            "Assignment3 00.jpg", 
+            "TDMovieOut.0 - 01 - MP4.mp4",
+            "Assignment3 11.png", 
+            "Assignment3 22.png",
+            "Assignment3 33.png", 
+            "Assignment3 44.png", 
+            "Assignment3 55.png",
+            "Assignment4 11.gif", 
+            "line_art-4_副本.png", 
+            "line_art-4.png",
+            "portrait.png", 
+            "w1 01.png", 
+            "w2 00.jpg", 
+            "w2 01.png", 
+            "w2 02.png",
+            "W4 05.png", 
+            "W5 03.png", 
+            "week2 01.jpg", 
+            "week2 02.jpg",
+            "week3 05.png", 
+            "week3 07.png", 
+            "week3 08.png",
+            "DSCF7140.jpg",
+            "DSCF7204.jpg",
+            "IMG_0514.JPG",
+            "IMG_1023.JPG",
+            "IMG_1041.jpg",
+            "IMG_1215.jpg",
+            "_48I6093 copy.jpg",
+            "_48I6258.jpg",
+            "_48I6288.jpg",
+            "DSC01315 copy.JPG",
+            "DSC01324 copy.JPG",
+            "DSC01336 copy.JPG",
+            "DSCF5757.jpg",
+            "DSCF5782.JPG"
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ];
+
+        const loader = document.getElementById('image-loader');
+
+        fileNames.forEach(file => {
+            const container = document.createElement('div');
+            container.className = 'grid-item';
+
+            const extension = file.split('.').pop().toLowerCase();
+            
+            if (['mp4', 'webm', 'mov'].includes(extension)) {
+                const video = document.createElement('video');
+                // 确保路径 Gallery/ 正确
+                video.src = `Gallery/${file}`;
+                video.autoplay = true;
+                video.loop = true;
+                video.muted = true;
+                video.setAttribute('playsinline', '');
+                container.appendChild(video);
+            } else {
+                const img = document.createElement('img');
+                img.src = `Gallery/${file}`;
+                img.loading = 'lazy';
+                container.appendChild(img);
+            }
+
+            loader.appendChild(container);
+        });
+    </script>
+</body>
+</html>
