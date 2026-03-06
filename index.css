@@ -13,6 +13,17 @@ body {
   overflow-x: hidden; /* 允许垂直滚动看视频 */
 }
 
+
+html, body{
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE / Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  display: none;               /* Chrome / Safari */
+}
+
 /* ===== 2. 介绍文字区域 (第一屏) ===== */
 .info-content {
   min-height: 100vh; /* 占满第一屏 */

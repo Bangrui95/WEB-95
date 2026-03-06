@@ -15,6 +15,17 @@ body {
   overflow-x: hidden; 
 }
 
+
+html, body{
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE / Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar{
+  display: none;               /* Chrome / Safari */
+}
+
 /* ===== 2. 作品网格布局 ===== */
 .work-grid {
   display: grid;
@@ -112,3 +123,8 @@ body {
 }
 
 
+@media (max-width: 900px) {
+  .work-grid{
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}

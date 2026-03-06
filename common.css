@@ -85,3 +85,127 @@ body {
     letter-spacing: 0.01em;
   }
 }
+
+
+/* ===== Mobile menu button (default hidden on desktop) ===== */
+.nav-burger{
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1000001; /* 比 navbar 还高一点点也行 */
+}
+
+.nav-burger span{
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  margin: 6px 0;
+  border-radius: 2px;
+}
+
+/* ===== Fullscreen overlay (hidden by default) ===== */
+.nav-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 1000000; /* 覆盖所有内容，包括左侧logo */
+  display: none;     /* 默认不显示 */
+}
+
+/* 背景：右黑(100%) → 左透明(0%) */
+.nav-overlay::before{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to left,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* 右侧菜单容器：从右往左滑入 */
+.nav-overlay-panel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(78vw, 420px);
+  padding: 110px 28px 40px 28px; /* 顶部留出空间，避免挡导航 */
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: flex-end; /* 右对齐 */
+  transform: translateX(100%);
+  transition: transform .35s ease;
+}
+
+/* 链接样式 */
+.nav-overlay-link{
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* hover 仍然变红（可选） */
+.nav-overlay-link:hover{
+  color: rgb(255, 6, 0);
+}
+
+/* 打开状态 */
+.nav-open .nav-overlay{
+  display: block;
+}
+
+.nav-overlay-panel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(78vw, 420px);
+  padding: 110px 28px 40px 28px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 22px;
+
+  transform: translateX(100%);
+}
+.nav-open .nav-overlay-panel{
+  transform: translateX(0);
+  transition: transform 0.36s cubic-bezier(.22,.61,.36,1);
+}
+
+.nav-overlay{
+  opacity: 0;
+}
+
+.nav-open .nav-overlay{
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* 打开菜单时禁止页面滚动 */
+.nav-open body{
+  overflow: hidden;
+}
+
+/* ===== Mobile: hide right links, show burger ===== */
+@media (max-width: 768px){
+  .nav-right{
+    display: none;
+  }
+  .nav-burger{
+    display: block;
+  }
+}
