@@ -2,8 +2,16 @@ document.addEventListener("DOMContentLoaded", function() {
   const path = window.location.pathname;
   const page = path.split("/").pop();
 
-  // ✅ 核心修正：加入 ""，防止在根目录下路径出错
-  const mainPages = ["index.html", "work.html", "info.html", "contact.html", "gallery.html", ""];
+  const mainPages = [
+    "index.html",
+    "work.html",
+    "system.html",
+    "info.html",
+    "contact.html",
+    "gallery.html",
+    ""
+  ];
+
   const isMainPage = mainPages.includes(page);
   const prefix = isMainPage ? '' : '../';
 
@@ -17,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </a>
       <div class="nav-right">
         <a href="${prefix}work.html" class="nav-link">DESIGN</a>
-         <a href="${prefix}system.html" class="nav-link">TECH</a>
+        <a href="${prefix}system.html" class="nav-link">TECH</a>
         <a href="${prefix}info.html" class="nav-link">INFO</a>
         <a href="${prefix}gallery.html" class="nav-link">GALLERY</a>
         <a href="${prefix}contact.html" class="nav-link">CONTACT</a>
